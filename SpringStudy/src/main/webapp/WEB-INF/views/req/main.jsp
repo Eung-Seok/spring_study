@@ -20,5 +20,7 @@
 		<h2>여기는 Form Post로 요청할거임</h2>
 		<button type="submit">요청</button>
 	</form>
+	
+	
 </body>
 </html>
