@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>home</h1>
+	<h1>여기는 main 페이지입니다.</h1>
 </body>
 </html>

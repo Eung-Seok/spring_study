@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<h1>home</h1>
+	<h1>/board/notice</h1>
 </body>
 </html>

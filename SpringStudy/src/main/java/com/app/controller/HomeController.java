@@ -13,6 +13,6 @@ public String home() {
 //return "/WEB-INF/views/mainpage.jsp";
 
 //--ViewResolver 설정 이후
-return "mainpage";
+return "home";
 }
 }
