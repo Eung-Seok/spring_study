@@ -17,7 +17,7 @@ public class Quiz07Controller {
 	public String listTest(@RequestParam(required = false) String type, Model model) {
 		if(type.equals("str")) {
 		model.addAttribute("num", 10);
-		return "/quiz/quiz07/listtest1";
+		return "redirect:/quiz07/listTest/str";
 		} else if(type.equals("member")) {
 			List<Member> productList = new ArrayList<Member>();
 			for(int i = 0; i < 5; i++) {
@@ -25,9 +25,26 @@ public class Quiz07Controller {
 			}
 			model.addAttribute("memberList", productList);
 			
-			return  "/quiz/quiz07/listtest2";
+			return  "redirect:/quiz07/listTest/member";
 		}
 		return "";
+	}
+	
+	@GetMapping("/listTest/str")
+	public String str(@RequestParam(required = false) String type, Model model) {
+		model.addAttribute("num", 10);
+		return "quiz/quiz07/listtest1";
+	}
+	
+	@GetMapping("/listTest/member")
+	public String member(@RequestParam(required = false) String type, Model model) {
+		List<Member> productList = new ArrayList<Member>();
+		for(int i = 0; i < 5; i++) {
+			productList.add(new Member("아이디"+(i+1), "비번"+(i+1), "이름"+(i+1)));
+		}
+		model.addAttribute("memberList", productList);
+		
+		return "quiz/quiz07/listtest2";
 	}
 	
 }
