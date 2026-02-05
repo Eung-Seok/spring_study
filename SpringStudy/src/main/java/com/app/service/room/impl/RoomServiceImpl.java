@@ -45,5 +45,13 @@ public@Service class RoomServiceImpl implements RoomService{
 		int result = roomDAO.saveRoom(room);
 		return result;
 	}
+	@Override
+	public Room findRoomByRoomId(int roomId) {
+
+		Room room = roomDAO.findRoomByRoomId(roomId);
+		
+		return room;
+	}
+
 	
 }
