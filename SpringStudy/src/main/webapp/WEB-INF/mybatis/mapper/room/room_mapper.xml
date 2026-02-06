@@ -5,32 +5,52 @@
 
 <mapper namespace="room_mapper">
 
-<!-- 	<insert id="saveRoom" parameterType="com.app.dto.room.Room"> -->
+	<!-- <insert id="saveRoom" parameterType="com.app.dto.room.Room"> -->
 	<insert id="saveRoom" parameterType="Room">
 		INSERT INTO T_ROOM VALUES (
-				 SEQ_T_ROOM_PK.nextval,
-				 #{buildingName},
-				 #{roomNumber},
-				 #{floor},
-				 #{maxGuestCount},
-				 #{viewType}  )
+		SEQ_T_ROOM_PK.nextval,
+		#{buildingName},
+		#{roomNumber},
+		#{floor},
+		#{maxGuestCount},
+		#{viewType} )
 	</insert>
 
 	<select id="findRoomList" resultType="Room">
 		SELECT *
 		FROM T_ROOM
-		ORDER BY room_id
+		ORDER BY
+		room_id
 	</select>
-	
+
 	<select id="findUserList" resultType="User">
 		SELECT * FROM T_USER
 	</select>
-	
-	<select id="findRoomByRoomId" resultType="Room" parameterType="int">
+
+	<select id="findRoomByRoomId" resultType="Room"
+		parameterType="int">
 		SELECT *
 		FROM T_ROOM
 		WHERE room_id = #{roomId}
 	</select>
-	
-	
+
+	<delete id="removeRoom" parameterType="int">
+		DELETE FROM T_ROOM
+		WHERE
+		room_id = #{roomId}
+	</delete>
+
+	<update id="modifyRoom" parameterType="Room">
+		UPDATE T_ROOM
+		SET
+		BUILDING_NAME = #{buildingName},
+		ROOM_NUMBER = #{roomNumber},
+		FLOOR = #{floor},
+		MAX_GUEST_COUNT = #{maxGuestCount},
+		VIEW_TYPE = #{viewType}
+		WHERE ROOM_ID = #{roomId}
+
+	</update>
+
+
 </mapper>		  

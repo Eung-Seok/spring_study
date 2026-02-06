@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.app.dao.user.UserDAO;
+import com.app.dto.room.Room;
 import com.app.dto.user.User;
 
 @Repository
@@ -31,4 +32,35 @@ public class UserDAOImpl implements UserDAO {
 		return userList;
 	}
 
+	@Override
+	public User findUserById(String id) {
+
+		User user = sqlSessionTemplate.selectOne("user_mapper.findUserById", id);
+		
+		return user;
+	}
+	
+	@Override
+	public User checkUserLogin(User user) {
+		
+		User loginUser = sqlSessionTemplate.selectOne("user_mapper.checkUserLogin", user);
+		
+		return loginUser;
+	}
+	
+	@Override
+	public int modifyPw(User user) {
+
+		int result = sqlSessionTemplate.update("user_mapper.modifyPw", user);
+
+		return result;
+	}
+	
+	@Override
+	public int modifyUser(User user) {
+
+		int result = sqlSessionTemplate.update("user_mapper.modifyUser", user);
+
+		return result;
+	}
 }

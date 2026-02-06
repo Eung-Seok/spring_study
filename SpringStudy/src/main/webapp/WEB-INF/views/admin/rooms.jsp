@@ -11,6 +11,11 @@
 	<h1>관리자 페이지</h1>
 	<h2>rooms 객실 목록</h2>
 	
+	
+	<button id="btn_registerRoom">객실 추가하기</button>
+	<br>
+	<br>
+	
 	<c:forEach var="room" items="${roomList}">
 		<p>
 			<a href="/admin/room/${room.roomId}">
@@ -23,8 +28,31 @@
 				</c:choose>
 			</a>
 			
+			<%-- 			<button type="button" onClick=" location.href='/admin/removeRoom?roomId=${room.roomId}' ">삭제하기</button> --%>
+			<button type="button" onClick="removeRoom(${room.roomId})">삭제하기</button>
+			<button type="button" onClick="modifyRoom(${room.roomId})">수정하기</button>
+			
 		</p>
 	</c:forEach>
+	
+	<script>
+		const btn_registerRoom = document.getElementById('btn_registerRoom');
+		btn_registerRoom.addEventListener('click', ()=>{
+			location.href="/admin/registerRoom";
+		})
+	
+	
+		function removeRoom(roomId){
+			if(confirm("정말 삭제하시겠습니까?")){
+				location.href='/admin/removeRoom?roomId=' + roomId;
+			}		
+		}
+		
+		function modifyRoom(roomId){
+			location.href='/admin/modifyRoom?roomId=' + roomId;
+		}
+	
+	</script>
 	
 </body>
 </html>
