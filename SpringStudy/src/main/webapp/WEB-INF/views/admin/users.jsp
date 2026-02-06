@@ -11,6 +11,25 @@
 	<h1>관리자 페이지</h1>
 	<h2>사용자 목록 조회</h2>
 	
+	<div>
+		<form action="" method="get">
+			<p>검색기준</p>
+			<label>아이디 <input type="checkbox" name="id" value="searchId"   ></label>
+			<label>이름 <input type="checkbox" name="name" ></label>
+			
+			<br>
+			<label><input type="radio" name="userType" value="ADM"  >관리자</label>
+			<label><input type="radio" name="userType" value="CUS" >고객(사용자)</label>
+			<br>
+			
+			<label>검색어 : <input type="text" name="searchKeyword" ></label>
+			<button type="submit">검색</button>	
+		</form>
+		
+	</div>
+	
+	<hr>
+	
 	<c:forEach var="user" items="${userList}">
 		<p>
 			<a href="/admin/user/${user.id}">
@@ -18,6 +37,7 @@
 			${user.id} ${user.pw} ${user.name} 
 			<c:if test="${user.userType == 'ADM'}">관리자</c:if>
 			<c:if test="${user.userType == 'CUS'}">사용자</c:if>
+			</a>
 		</p>
 	</c:forEach>
 	
