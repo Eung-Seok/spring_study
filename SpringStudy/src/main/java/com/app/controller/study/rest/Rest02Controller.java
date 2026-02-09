@@ -115,6 +115,12 @@ public class Rest02Controller {
 		
 		return user;
 	}
+	
+	@GetMapping("/rest/rest10")
+	public String rest10() {
+		
+		return "this is RESTAPI 응답 텍스트 입니다.";		
+	}
 }
 
 
