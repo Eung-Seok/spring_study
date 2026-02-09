@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.app.dao.user.UserDAO;
-import com.app.dto.room.Room;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.user.UserService;
@@ -121,5 +120,22 @@ public class UserServiceImpl implements UserService {
 		List<User> userList = userDAO.findUserListBySearchCondition(userSearchCondition);
 		
 		return userList;
+	}
+
+	@Override
+	public boolean isDuplicatedId(String id) {
+		//중복여부 체크 return
+		
+		//중복? true
+		//아니면? false
+		
+		//해당 ID가 DB에 이미 있는지?
+		User user = userDAO.findUserById(id);
+		
+		if(user == null) {
+			return false;
+		} else {
+			return true;
+		}
 	}
 }

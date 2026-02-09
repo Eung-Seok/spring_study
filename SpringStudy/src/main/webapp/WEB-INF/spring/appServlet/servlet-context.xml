@@ -43,8 +43,5 @@ http://www.springframework.org/schema/context/spring-context.xsd">
 			</beans:bean>				
 		</message-converters>					
 	</annotation-driven>						
-
 	
-
-
 </beans:beans>

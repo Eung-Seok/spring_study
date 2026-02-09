@@ -6,17 +6,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
+import com.app.common.ApiCommonCode;
 import com.app.common.CommonCode;
 import com.app.service.user.UserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.ResponseBody;
+
 import com.app.util.LoginManager;
+import com.app.dto.api.ApiResponse;
+import com.app.dto.api.ApiResponseHeader;
 import com.app.dto.user.User;
+import com.app.dto.user.UserDupCheck;
 
 @Controller
 public class CustomerController {
-
 	// 고객 사용자 관련된 서비스 (계정 관련... )
 
 	@Autowired
@@ -26,6 +33,70 @@ public class CustomerController {
 	public String signup() {
 		return "customer/signup";
 	}
+	
+	@ResponseBody //텍스트 응답
+	@PostMapping("/customer/checkDupId")
+	public String checkDupId(@RequestBody String data) { 
+							//요청 body 데이터를 단순 텍스트 수신
+		System.out.println("/customer/checkDupId");
+		System.out.println(data);
+
+		
+		// data: 중복인지 체크할 아이디
+		// -> db에서 중복된 사용자 아이디 있는지 체크
+		
+		Boolean result = userService.isDuplicatedId(data);
+		System.out.println(result);
+		
+		if(result) {//true 중복
+			return "Y";
+		} else {//false 중복아님
+			return "N";
+		}
+	}
+	
+	@ResponseBody //json 요청 json 응답
+	@PostMapping("/customer/checkDupIdJson")
+	public ApiResponse<String> checkDupIdJson(@RequestBody UserDupCheck userDupCheck) { 
+							//요청 body 데이터에 json format text가 담겨져 있는 경우에
+							//key값 == 필드변수   자동으로 객체로 파싱되어 데이터가 담김
+		System.out.println("/customer/checkDupId");
+		System.out.println(userDupCheck);
+
+		
+		// data: 중복인지 체크할 아이디
+		// -> db에서 중복된 사용자 아이디 있는지 체크
+	
+		
+		Boolean result = userService.isDuplicatedId( userDupCheck.getId() );
+		System.out.println(result);
+		
+		//return ApiResponse<String>   body "Y" "N"
+		ApiResponse<String> res = new ApiResponse<String>();
+		
+		//header
+		ApiResponseHeader header = new ApiResponseHeader();
+		header.setResultCode( ApiCommonCode.API_RESULT_SUCCESS);
+		header.setResultMsg( ApiCommonCode.API_RESULT_SUCCESS_MSG);
+		
+		res.setHeader(header);
+		//body
+		
+		
+		res.setBody("Y");
+		
+		
+		
+		
+		if(result) {//true 중복
+			res.setBody("Y");
+		} else {//false 중복아님
+			res.setBody("N");
+		}
+		
+		return res; //json 객체 변환
+	}
+	
 
 	@PostMapping("/customer/signup")
 	public String signupAction(User user) {
