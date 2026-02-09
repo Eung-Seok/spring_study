@@ -3,6 +3,7 @@ package com.app.dao.room;
 import java.util.List;
 
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 
 public interface RoomDAO {
 	
@@ -16,4 +17,6 @@ public interface RoomDAO {
 	int removeRoom(int roomId);
 
 	int modifyRoom(Room room);
+
+	List<Room> findRoomListBySearchCondition(RoomSearchCondition roomSearchCondition);
 }

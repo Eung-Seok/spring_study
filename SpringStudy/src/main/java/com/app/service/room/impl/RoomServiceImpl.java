@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.app.dao.room.RoomDAO;
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 import com.app.service.room.RoomService;
 
 
@@ -69,5 +70,12 @@ public@Service class RoomServiceImpl implements RoomService{
 		return result;
 	}
 
+	@Override
+	public List<Room> findRoomListBySearchCondition(RoomSearchCondition roomSearchCondition) {
+
+		List<Room> roomList = roomDAO.findRoomListBySearchCondition(roomSearchCondition);
+		
+		return roomList;
+	}
 	
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.app.dto.room.Room;
+import com.app.dto.room.RoomSearchCondition;
 import com.app.dto.user.User;
 import com.app.dto.user.UserSearchCondition;
 import com.app.service.room.RoomService;
