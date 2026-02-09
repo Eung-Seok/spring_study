@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.app.dao.user.UserDAO;
+import com.app.dto.user.UserSearchCondition;
 import com.app.dto.room.Room;
 import com.app.dto.user.User;
 
@@ -63,4 +64,14 @@ public class UserDAOImpl implements UserDAO {
 
 		return result;
 	}
+	
+
+	@Override
+	public List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition) {
+		List<User> userList = sqlSessionTemplate.selectList("user_mapper.findUserListBySearchCondition"
+																, userSearchCondition);
+		
+		return userList;
+	}
+	
 }

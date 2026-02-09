@@ -3,6 +3,7 @@ package com.app.service.user;
 import java.util.List;
 
 import com.app.dto.user.User;
+import com.app.dto.user.UserSearchCondition;
 
 public interface UserService {
 
@@ -17,4 +18,6 @@ public interface UserService {
 	
 	int modifyPw(User user);
 	int modifyUser(User user);
+
+	public List<User> findUserListBySearchCondition(UserSearchCondition userSearchCondition);
 }
